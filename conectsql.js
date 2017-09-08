@@ -26,19 +26,19 @@ oApp.get('/habitacion', function(oReq, oRes) {
    });
 });
  
-function CreateGATO(oDataGATO, oResponse) {  
-  var sSQLCreate = "INSERT INTO dt_habitacion (Etage, NombreHabitacion, Prix, Estatus, DateEntree, DateSortie) VALUES (NULL, ";
-  sSQLCreate += "'" + oDataGATO.nombre + "', ";
-  sSQLCreate += "'" + oDataGATO.raza + "', ";
-  sSQLCreate += "'" + oDataGATO.color + "', ";
-  sSQLCreate += "'" + oDataGATO.edad + "', ";
-  sSQLCreate += "'" + oDataGATO.peso + "', ";
-  sSQLCreate += "NOW())";
+function CreateHabitacion(oDataHabitacion, oResponse) {    // , DateEntree, DateSortie
+  var sSQLCreate = "INSERT INTO dt_habitacion (Etage, NombreHabitacion, Prix, Estatus) VALUES (NULL, ";
+  sSQLCreate += "'" + oDataHabitacion.etage + "', ";
+  sSQLCreate += "'" + oDataHabitacion.nombreHabitacion + "', ";
+  sSQLCreate += "'" + oDataHabitacion.prix + "', ";
+  sSQLCreate += "'" + oDataHabitacion.estatus + "' ) ";
+  // sSQLCreate += "'" + oDataHabitacion.peso + "', ";
+  // sSQLCreate += "NOW())";
   /*
-   {'oDataGATO.Etage':'1'
- 'oDataGATO.NombreHabitacion':'1'
-'oDataGATO.Prix':'1'
-'oDataGATO.Estatus':'1'}
+   {'oDataHabitacion.Etage':'1'
+ 'oDataHabitacion.NombreHabitacion':'1'
+'oDataHabitacion.Prix':'1'
+'oDataHabitacion.Estatus':'1'}
   */
     
   oMyConnection.query(sSQLCreate, function(oError, oRows, oCols) {
@@ -59,7 +59,7 @@ function CreateGATO(oDataGATO, oResponse) {
   });
 } 
  
-function ReadGATO(oResponse) {
+function ReadHabitacion(oResponse) {
   var sSQLRead = "SELECT * FROM dt_habitacion";
   oMyConnection.query(sSQLRead, function(oError, oRows, oCols) {
     if(oError) {
@@ -77,24 +77,24 @@ function ReadGATO(oResponse) {
     }    
   });    
 }
-function UpdateGATO(oDataGATO, oResponse) {
+function UpdateHabitacion(oDataHabitacion, oResponse) {
   var sSQLUpdate = "UPDATE dt_habitacion SET last_updated = NOW() ";
-  if(oDataGATO.hasOwnProperty('nombre')) {
-    sSQLUpdate += " AND nombre = '" + oDataGATO.nombre + "' ";
+  if(oDataHabitacion.hasOwnProperty('nombre')) {
+    sSQLUpdate += " AND nombre = '" + oDataHabitacion.nombre + "' ";
   }
-  if(oDataGATO.hasOwnProperty('raza')) {
-    sSQLUpdate += " AND raza = '" + oDataGATO.raza + "' ";
+  if(oDataHabitacion.hasOwnProperty('raza')) {
+    sSQLUpdate += " AND raza = '" + oDataHabitacion.raza + "' ";
   }
-  if(oDataGATO.hasOwnProperty('color')) {
-    sSQLUpdate += " AND color = '" + oDataGATO.color + "' ";
+  if(oDataHabitacion.hasOwnProperty('color')) {
+    sSQLUpdate += " AND color = '" + oDataHabitacion.color + "' ";
   }
-  if(oDataGATO.hasOwnProperty('edad')) {
-    sSQLUpdate += " AND edad = '" + oDataGATO.edad + "' ";
+  if(oDataHabitacion.hasOwnProperty('edad')) {
+    sSQLUpdate += " AND edad = '" + oDataHabitacion.edad + "' ";
   }
-  if(oDataGATO.hasOwnProperty('peso')) {
-    sSQLUpdate += " AND peso = '" + oDataGATO.peso + "' ";    
+  if(oDataHabitacion.hasOwnProperty('peso')) {
+    sSQLUpdate += " AND peso = '" + oDataHabitacion.peso + "' ";    
   }    
-  sSQLUpdate = " WHERE iddt_habitacion = '" + oDataGATO.iddt_habitacion + "'";
+  sSQLUpdate = " WHERE iddt_habitacion = '" + oDataHabitacion.iddt_habitacion + "'";
   
   oMyConnection.query(sSQLUpdate, function(oErrUpdate, oRowsUpdate, oColsUpdate) {
     if(oErrUpdate) {
@@ -111,8 +111,8 @@ function UpdateGATO(oDataGATO, oResponse) {
     }
   });
 }
-function DeleteGATO(oDataGATO, oResponse) {
-  var sSQLDelete = "DELETE FROM dt_habitacion WHERE iddt_habitacion = '" + oDataGATO.iddt_habitacion + "'";
+function DeleteHabitacion(oDataHabitacion, oResponse) {
+  var sSQLDelete = "DELETE FROM dt_habitacion WHERE iddt_habitacion = '" + oDataHabitacion.iddt_habitacion + "'";
   oMyConnection.query(sSQLDelete, function(oErrDelete, oRowsDelete, oColsDelete) {
     if(oErrDelete) {
       oResponse.write(JSON.stringify({
@@ -141,19 +141,19 @@ function DeleteGATO(oDataGATO, oResponse) {
    switch(sOP) {
      
      case 'CREATE':      
-      CreateGATO(oDataOP, oRes);
+      CreateHabitacion(oDataOP, oRes);
      break;
      
      case 'READ':
-      ReadGATO(oRes);
+      ReadHabitacion(oRes);
      break;
      
      case 'UPDATE':
-      UpdateGATO(oDataOP, oRes);
+      UpdateHabitacion(oDataOP, oRes);
      break;
      
      case 'DELETE':
-      DeleteGATO(oDataOP, oRes);
+      DeleteHabitacion(oDataOP, oRes);
      break;
      
      default:
@@ -167,7 +167,7 @@ function DeleteGATO(oDataGATO, oResponse) {
  });
  
  oApp.listen(9016, function(oReq, oRes) {
-   console.log("Servicios web gestión entidad GATO activo, en puerto 9016");   
+   console.log("Servicios web gestión entidad Habitacion activo, en puerto 9016");   
  });
 
 

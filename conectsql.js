@@ -32,14 +32,6 @@ function CreateHabitacion(oDataHabitacion, oResponse) {    // , DateEntree, Date
   sSQLCreate += "'" + oDataHabitacion.nombreHabitacion + "', ";
   sSQLCreate += "'" + oDataHabitacion.prix + "', ";
   sSQLCreate += "'" + oDataHabitacion.estatus + "' ) ";
-  // sSQLCreate += "'" + oDataHabitacion.peso + "', ";
-  // sSQLCreate += "NOW())";
-  /*
-   {'oDataHabitacion.Etage':'1'
- 'oDataHabitacion.NombreHabitacion':'1'
-'oDataHabitacion.Prix':'1'
-'oDataHabitacion.Estatus':'1'}
-  */
     
   oMyConnection.query(sSQLCreate, function(oError, oRows, oCols) {
     if(oError) {
@@ -169,8 +161,3 @@ function DeleteHabitacion(oDataHabitacion, oResponse) {
  oApp.listen(9016, function(oReq, oRes) {
    console.log("Servicios web gestión entidad Habitacion activo, en puerto 9016");   
  });
-
-
-
-
-

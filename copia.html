@@ -6,20 +6,36 @@
 	</title>
 </head>
 <body>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<h1>Premiers pas avec NodeJS</h1>
 
 	<style type="text/css">
-		
+		svg{
+			position: absolute;
+			width: 100%;
+			height: 5000px;
+		}
+		img{
+			position: absolute;
+			z-index: -1;
+		}
+		.cls-1:hover
+		{
+			fill: #f0f !important;
+			opacity: .8;
+		}
+		.active{
+			fill: #00f !important;
+			opacity: .9;
+		}
+		.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:1.5px;}
+		.aux{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:1.5px;}
 	</style>
 
 	<div id="ok">
 		<div id="ok2">
-			<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" ><defs>
-	<style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:1.5px;}</style>
-</defs>
-<title>recortadoOkfloorplan-2-second</title>
-<rect class="cls-1" x="0.75" y="0.75" width="743" height="752"/>
+			<svg>
+			<rect class="aux" x="0.75" y="0.75" width="743" height="752"/>
 <rect class="cls-1" x="9.75" y="50.75" width="88" height="62"/>
 <rect class="cls-1" x="122.75" y="55.08" width="88" height="54.67"/>
 <rect class="cls-1" x="9.75" y="116.08" width="88" height="53.33"/>
@@ -69,11 +85,19 @@
 <rect class="cls-1" x="645.75" y="110.75" width="87.5" height="58.5"/>
 <rect class="cls-1" x="533.25" y="110.75" width="89" height="58.5"/>
 <rect class="cls-1" x="645.75" y="51.25" width="87.5" height="59.5"/>
-<rect class="cls-1" x="533.25" y="51.25" width="89" height="59.5"/></svg>
-			<img src="recortado floorplan-2-second.png">
+<rect class="cls-1" x="533.25" y="51.25" width="89" height="59.5"/>
+</svg>
+			<img src="src/recortado floorplan-2-second.png">
 		</div>
 	</div>
 
+	<script type="text/javascript">
+		$(".cls-1").click(function(){
+			console.log("contenido");
+			$(this).parent().children().removeClass("active");
 
+			$(this).addClass("active");
+		});
+	</script>
 </body>
 </html>

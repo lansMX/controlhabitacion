@@ -1,9 +1,25 @@
 var express = require('express');
 var bodyParser = require('body-parser'); 
 var mysql = require('mysql');
-var oApp = express(); 
+let http = require('http');
+let fs = require('fs');
+
+let server = http.createServer();
+
+server.on('request', function (enviamos, responde){
+  fs.readFile('copia.html', function (err, data){
+    if (err) throw err;
+    responde.writeHead(200, {
+      'Content-type': 'text/html; charset=utf-8'
+    })
+    responde.end(data);
+  })
+  respond.uese(express.static(__dirname + '/public'));
+}).listen(8080);
+
+var oApp = express();
 oApp.use(bodyParser.json());
-oApp.use(bodyParser.urlencoded({ extended: true })); 
+oApp.use(bodyParser.urlencoded({ extended: true }));
 var oMyConnection = mysql.createConnection({
    host: '127.0.0.1',
    user: 'root',
@@ -16,7 +32,7 @@ oApp.get('/habitacion', function(oReq, oRes) {
      if(oError) {
        oRes.write(JSON.stringify({
          error: true,
-         error_object: oError         
+         error_object: oError
        }));
        oRes.end();
      } else {
